@@ -50,3 +50,28 @@ class LinearClassifier():
                 correct += 1
             total += 1
         return 1.0*correct/total
+   
+    def recall (self, system, gold) :
+        system_predictions = 0.0
+        gold_positives = 0.0
+        for i in range(len(system)) :
+            if (system[i] == gold[i] and gold[i] == 1) :
+                system_predictions += 1
+            if (gold[i] == 1):
+                gold_positives += 1
+        return 1.0 *system_predictions/gold_positives
+    
+    def precision(self, system, gold) :
+        system_positives = 0.0
+        system_predictions_1 = 0.0
+        for i in range(len(system)) :
+            if (system[i] == gold[i] and system[i] == 1) :
+                system_predictions_1 += 1
+            if (system[i] == 1):
+                system_positives += 1
+            # print("predictions :",system_predictions_1,"positives:",system_positives)
+        return 1.0 *system_predictions_1/system_positives
+    
+    def f_score(self,recall,precision) :
+        return (2*recall*precision) / (recall + precision)
+        
